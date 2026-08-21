@@ -1,0 +1,2466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="theme-color" content="#08090b">
+    <meta name="description" content="Guled Hassen — Engineer, Digital Creator and Developer. A multidisciplinary portfolio of digital products, business systems, engineering and creative technology.">
+    <meta name="author" content="Guled Hassen">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Guled Hassen — Engineer · Digital Creator · Developer">
+    <meta property="og:description" content="Engineering ideas into digital experiences, systems and practical solutions.">
+    <meta property="og:type" content="website">
+    <title>GULED HASSEN — Engineer · Digital Creator · Developer</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- html2canvas for PDF generation -->
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js">
+    </script>
+
+    <style>
+        :root {
+            --bg: #08090b;
+            --surface: #111317;
+            --surface2: #17191e;
+            --surface3: #1d2026;
+            --text: #f4f5f7;
+            --muted: #9ba0aa;
+            --dim: #686e79;
+            --gold: #d4a853;
+            --gold2: #f0ce82;
+            --line: rgba(255, 255, 255, .08);
+            --green: #56d68a;
+            --orange: #f3aa45;
+            --violet: #a88cf5;
+            --radius: 20px;
+            --max: 1180px;
+            --ease: cubic-bezier(.16, 1, .3, 1);
+            --nav-height: 58px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+        html {
+            scroll-behavior: smooth
+        }
+        body {
+            font-family: Inter, system-ui, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden
+        }
+        body.locked {
+            overflow: hidden
+        }
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+        button {
+            font: inherit;
+            background: none;
+            border: none;
+            color: inherit;
+            cursor: pointer;
+        }
+        ::selection {
+            background: var(--gold);
+            color: #08090b
+        }
+        .container {
+            width: min(var(--max), calc(100% - 32px));
+            margin-inline: auto
+        }
+        .skip {
+            position: fixed;
+            left: 12px;
+            top: 12px;
+            z-index: 10000;
+            transform: translateY(-150%);
+            background: var(--gold);
+            color: #000;
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-weight: 700
+        }
+        .skip:focus {
+            transform: none
+        }
+        .progress {
+            position: fixed;
+            z-index: 1001;
+            left: 0;
+            top: 0;
+            height: 2px;
+            width: 0;
+            background: linear-gradient(90deg, var(--gold), var(--gold2));
+            box-shadow: 0 0 18px rgba(212, 168, 83, .5);
+            will-change: width;
+        }
+
+        /* ===== NAVIGATION ===== */
+        .nav {
+            position: fixed;
+            z-index: 1000;
+            top: 16px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(1160px, calc(100% - 24px));
+            height: var(--nav-height);
+            padding: 0 14px 0 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(12, 13, 16, .78);
+            border: 1px solid var(--line);
+            border-radius: 999px;
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            box-shadow: 0 12px 50px rgba(0, 0, 0, .28)
+        }
+        .logo {
+            font-size: 1rem;
+            font-weight: 900;
+            letter-spacing: .12em
+        }
+        .logo span {
+            color: var(--gold)
+        }
+        .nav-links {
+            display: flex;
+            gap: 2px;
+            list-style: none
+        }
+        .nav-links a {
+            font-size: .68rem;
+            text-transform: uppercase;
+            letter-spacing: .11em;
+            color: var(--muted);
+            padding: 9px 12px;
+            border-radius: 999px;
+            transition: .25s;
+            white-space: nowrap;
+        }
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text);
+            background: rgba(212, 168, 83, .09)
+        }
+        .nav-cta {
+            font-size: .68rem;
+            text-transform: uppercase;
+            letter-spacing: .1em;
+            font-weight: 700;
+            color: #090a0c;
+            background: var(--gold);
+            padding: 10px 15px;
+            border-radius: 999px;
+            transition: .25s var(--ease);
+        }
+        .nav-cta:hover {
+            background: var(--gold2);
+            transform: scale(1.02);
+        }
+        .menu {
+            display: none;
+            background: none;
+            border: 0;
+            color: var(--text);
+            padding: 8px;
+            cursor: pointer
+        }
+        .menu span {
+            display: block;
+            width: 22px;
+            height: 2px;
+            background: currentColor;
+            margin: 4px;
+            border-radius: 3px;
+            transition: .3s var(--ease);
+        }
+        .menu.active span:nth-child(1) {
+            transform: translateY(6px) rotate(45deg);
+        }
+        .menu.active span:nth-child(2) {
+            opacity: 0;
+        }
+        .menu.active span:nth-child(3) {
+            transform: translateY(-6px) rotate(-45deg);
+        }
+
+        .mobile-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 900;
+            background: rgba(0, 0, 0, .65);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .4s var(--ease);
+        }
+        .mobile-overlay.open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .nav-links.mobile-open {
+            display: flex;
+            position: fixed;
+            top: calc(16px + var(--nav-height) + 8px);
+            left: 50%;
+            transform: translateX(-50%);
+            width: min(400px, calc(100% - 32px));
+            padding: 20px;
+            flex-direction: column;
+            background: rgba(12, 13, 16, .98);
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            box-shadow: 0 30px 80px rgba(0, 0, 0, .6);
+            gap: 4px;
+            z-index: 1001;
+        }
+        .nav-links.mobile-open a {
+            padding: 14px 16px;
+            text-align: center;
+            font-size: .85rem;
+            border-radius: 12px;
+            width: 100%;
+        }
+        .nav-links.mobile-open a:hover {
+            background: rgba(212, 168, 83, .08);
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            min-height: 100svh;
+            display: grid;
+            place-items: center;
+            position: relative;
+            text-align: left;
+            padding: 120px 0 80px;
+            overflow: hidden
+        }
+        .hero:before,
+        .hero:after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(60px);
+            pointer-events: none
+        }
+        .hero:before {
+            width: 420px;
+            height: 420px;
+            background: rgba(212, 168, 83, .07);
+            top: 18%;
+            left: 50%;
+            transform: translateX(-50%)
+        }
+        .hero:after {
+            width: 300px;
+            height: 300px;
+            background: rgba(90, 80, 160, .06);
+            bottom: -100px;
+            right: -100px
+        }
+        .hero-inner {
+            width: min(var(--max), calc(100% - 32px));
+            margin-inline: auto;
+            display: grid;
+            grid-template-columns: 1fr 240px;
+            gap: 50px;
+            align-items: center;
+            position: relative;
+            z-index: 1
+        }
+        .hero-content {
+            position: relative;
+            z-index: 1
+        }
+        .eyebrow {
+            font-size: .68rem;
+            letter-spacing: .25em;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 700
+        }
+        .hero h1 {
+            font-size: clamp(3.3rem, 10vw, 8.8rem);
+            line-height: .92;
+            letter-spacing: -.055em;
+            margin: 18px 0 20px;
+            font-weight: 900;
+            max-width: 1000px;
+            background: linear-gradient(135deg, #9f7730, #d4a853 38%, #f3d58c 55%, #b68b38);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent
+        }
+        .hero h2 {
+            font-size: clamp(.85rem, 1.8vw, 1.15rem);
+            font-weight: 600;
+            letter-spacing: .2em;
+            text-transform: uppercase;
+            color: var(--muted)
+        }
+        .hero h2 b {
+            color: var(--gold)
+        }
+        .hero-copy {
+            max-width: 700px;
+            margin: 25px 0 0;
+            color: #888e99;
+            font-size: clamp(1rem, 2vw, 1.25rem)
+        }
+        .hero-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 30px
+        }
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 46px;
+            padding: 0 20px;
+            border-radius: 999px;
+            border: 1px solid var(--line);
+            font-size: .75rem;
+            font-weight: 700;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            transition: .3s var(--ease);
+            cursor: pointer;
+        }
+        .btn-primary {
+            background: var(--gold);
+            color: #08090b;
+            border-color: var(--gold)
+        }
+        .btn-primary:hover {
+            background: var(--gold2);
+            transform: translateY(-2px)
+        }
+        .btn-ghost {
+            background: rgba(255, 255, 255, .025);
+            color: var(--text)
+        }
+        .btn-ghost:hover {
+            border-color: rgba(212, 168, 83, .45);
+            color: var(--gold2);
+            transform: translateY(-2px)
+        }
+        .btn-print {
+            background: transparent;
+            color: var(--text);
+            border-color: var(--line);
+        }
+        .btn-print:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+            transform: translateY(-2px);
+        }
+        .scroll {
+            position: absolute;
+            bottom: 28px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--dim);
+            font-size: .58rem;
+            letter-spacing: .2em;
+            text-transform: uppercase
+        }
+        .scroll:after {
+            content: "";
+            display: block;
+            width: 1px;
+            height: 32px;
+            margin: 8px auto 0;
+            background: linear-gradient(var(--gold), transparent)
+        }
+
+        /* ===== PROFILE PICTURE / AVATAR ===== */
+        .avatar-wrapper {
+            position: relative;
+            width: 240px;
+            height: 240px;
+            flex-shrink: 0;
+            justify-self: end
+        }
+        .avatar-ring {
+            position: absolute;
+            inset: -6px;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, transparent, var(--gold), var(--gold2), transparent, var(--gold), transparent);
+            opacity: .5;
+            animation: ringRotate 12s linear infinite;
+            filter: blur(1px);
+            pointer-events: none;
+        }
+        @keyframes ringRotate {
+            to {
+                transform: rotate(360deg)
+            }
+        }
+        .avatar-ring-glow {
+            position: absolute;
+            inset: -12px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 50% 50%, rgba(212, 168, 83, .15), transparent 70%);
+            animation: pulseGlow 4s ease-in-out infinite;
+            pointer-events: none;
+        }
+        @keyframes pulseGlow {
+            0%,
+            100% {
+                opacity: .6;
+                transform: scale(1)
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.04)
+            }
+        }
+        .avatar {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 20%, #1d2026, #0a0b0e);
+            border: 2px solid rgba(212, 168, 83, .3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, .5), inset 0 1px 0 rgba(255, 255, 255, .04)
+        }
+        .avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+            position: relative;
+            z-index: 2;
+            display: block;
+        }
+        .avatar img.hidden {
+            display: none;
+        }
+        .avatar-initials {
+            font-size: 5.4rem;
+            font-weight: 900;
+            letter-spacing: .08em;
+            background: linear-gradient(145deg, var(--gold), var(--gold2), #b68b38);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 0 40px rgba(212, 168, 83, .15);
+            pointer-events: none;
+            display: block;
+        }
+        .avatar-initials.hidden {
+            display: none;
+        }
+        .avatar-shimmer {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            background: linear-gradient(135deg, transparent 30%, rgba(255, 215, 140, .06) 50%, transparent 70%);
+            pointer-events: none;
+            animation: shimmerFloat 8s ease-in-out infinite;
+            z-index: 3;
+        }
+        @keyframes shimmerFloat {
+            0%,
+            100% {
+                transform: rotate(0deg) scale(1)
+            }
+            50% {
+                transform: rotate(30deg) scale(1.05)
+            }
+        }
+        .avatar-dots {
+            position: absolute;
+            inset: 0;
+            border-radius: 50%;
+            pointer-events: none;
+            background-image: radial-gradient(circle, rgba(212, 168, 83, .04) 1px, transparent 1px);
+            background-size: 12px 12px;
+            z-index: 2;
+        }
+
+        .avatar-badge {
+            position: absolute;
+            bottom: 6px;
+            right: 6px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gold);
+            border: 2px solid var(--bg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: #08090b;
+            box-shadow: 0 4px 20px rgba(212, 168, 83, .3);
+            z-index: 10;
+            cursor: pointer;
+            transition: .25s var(--ease);
+        }
+        .avatar-badge:hover {
+            transform: scale(1.1);
+            background: var(--gold2);
+        }
+        .avatar-badge svg {
+            width: 18px;
+            height: 18px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+        .avatar-status {
+            position: absolute;
+            bottom: 14px;
+            right: -6px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            background: #56d68a;
+            border: 2px solid var(--bg);
+            box-shadow: 0 0 0 3px rgba(86, 214, 138, .2);
+            animation: statusPulse 2.5s ease-in-out infinite;
+            z-index: 5;
+        }
+        @keyframes statusPulse {
+            0%,
+            100% {
+                box-shadow: 0 0 0 3px rgba(86, 214, 138, .15)
+            }
+            50% {
+                box-shadow: 0 0 0 8px rgba(86, 214, 138, .05)
+            }
+        }
+
+        .avatar-file-hint {
+            position: absolute;
+            bottom: -28px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: .55rem;
+            color: var(--dim);
+            letter-spacing: .06em;
+            white-space: nowrap;
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: 5;
+        }
+
+        /* ===== SECTIONS ===== */
+        .section {
+            padding: 105px 0
+        }
+        .section-head {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+            align-items: end;
+            margin-bottom: 42px
+        }
+        .section-label {
+            font-size: .66rem;
+            letter-spacing: .23em;
+            text-transform: uppercase;
+            color: var(--gold);
+            font-weight: 700;
+            margin-bottom: 10px
+        }
+        h3.section-title {
+            font-size: clamp(2.2rem, 5vw, 4.3rem);
+            line-height: 1;
+            letter-spacing: -.04em
+        }
+        .section-desc {
+            max-width: 580px;
+            color: var(--muted);
+            font-size: 1rem
+        }
+
+        .identity {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 70px;
+            align-items: center
+        }
+        .identity-word {
+            font-size: clamp(3rem, 7vw, 6.2rem);
+            font-weight: 900;
+            line-height: .92;
+            letter-spacing: -.06em
+        }
+        .identity-word .gold {
+            color: var(--gold)
+        }
+        .identity-word .dim {
+            color: #3c4048
+        }
+        .identity-copy p {
+            color: var(--muted);
+            font-size: 1.02rem;
+            margin-bottom: 18px
+        }
+        .identity-copy strong {
+            color: var(--text)
+        }
+        .tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-top: 25px
+        }
+        .tag {
+            font-size: .68rem;
+            color: var(--muted);
+            border: 1px solid var(--line);
+            padding: 7px 11px;
+            border-radius: 999px;
+            background: rgba(255, 255, 255, .018)
+        }
+
+        .project-toolbar {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: -15px 0 28px
+        }
+        .filter {
+            border: 1px solid var(--line);
+            background: transparent;
+            color: var(--muted);
+            padding: 8px 13px;
+            border-radius: 999px;
+            font-size: .68rem;
+            cursor: pointer;
+            transition: .25s var(--ease);
+        }
+        .filter:hover,
+        .filter.active {
+            color: var(--text);
+            border-color: rgba(212, 168, 83, .45);
+            background: rgba(212, 168, 83, .08)
+        }
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 16px
+        }
+        .card {
+            background: linear-gradient(145deg, var(--surface2), var(--surface));
+            border: 1px solid var(--line);
+            border-radius: var(--radius);
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: .45s var(--ease)
+        }
+        .card:before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 90% 0, rgba(212, 168, 83, .08), transparent 35%);
+            opacity: 0;
+            transition: .4s
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(212, 168, 83, .25);
+            box-shadow: 0 22px 70px rgba(0, 0, 0, .25)
+        }
+        .card:hover:before {
+            opacity: 1
+        }
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            align-items: start;
+            position: relative
+        }
+        .number {
+            font-size: .62rem;
+            color: var(--dim);
+            letter-spacing: .14em
+        }
+        .status {
+            font-size: .58rem;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            padding: 4px 9px;
+            border-radius: 999px;
+            border: 1px solid rgba(86, 214, 138, .25);
+            color: var(--green);
+            background: rgba(86, 214, 138, .06);
+            white-space: nowrap;
+        }
+        .status.concept {
+            color: var(--violet);
+            border-color: rgba(168, 140, 245, .25);
+            background: rgba(168, 140, 245, .06)
+        }
+        .status.development {
+            color: var(--orange);
+            border-color: rgba(243, 170, 69, .25);
+            background: rgba(243, 170, 69, .06)
+        }
+        .card h4 {
+            font-size: 1.45rem;
+            line-height: 1.15;
+            margin: 28px 0 7px;
+            position: relative
+        }
+        .category {
+            font-size: .64rem;
+            text-transform: uppercase;
+            letter-spacing: .12em;
+            color: var(--gold);
+            position: relative
+        }
+        .card p {
+            color: var(--muted);
+            font-size: .88rem;
+            line-height: 1.7;
+            margin: 14px 0 20px;
+            position: relative
+        }
+        .techs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            position: relative
+        }
+        .techs span {
+            font-size: .57rem;
+            text-transform: uppercase;
+            letter-spacing: .05em;
+            color: var(--dim);
+            padding: 5px 8px;
+            background: rgba(255, 255, 255, .035);
+            border-radius: 999px
+        }
+        .card-actions {
+            display: flex;
+            gap: 9px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            position: relative
+        }
+        .card-actions button,
+        .card-actions a {
+            font-size: .62rem;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            font-weight: 700;
+            padding: 8px 11px;
+            border-radius: 999px;
+            cursor: pointer;
+            transition: .25s var(--ease);
+            border: 1px solid transparent;
+        }
+        .case-btn {
+            background: transparent;
+            color: var(--gold);
+            border-color: rgba(212, 168, 83, .2);
+        }
+        .case-btn:hover {
+            background: rgba(212, 168, 83, .08);
+            border-color: var(--gold);
+        }
+        .live-btn {
+            background: var(--gold);
+            color: #08090b;
+            border-color: var(--gold);
+        }
+        .live-btn:hover {
+            background: var(--gold2);
+            transform: translateY(-2px);
+        }
+
+        .services {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px
+        }
+        .service {
+            border: 1px solid var(--line);
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 22px;
+            min-height: 145px;
+            transition: .3s
+        }
+        .service:hover {
+            border-color: rgba(212, 168, 83, .22);
+            transform: translateY(-3px)
+        }
+        .service-num {
+            font-size: .6rem;
+            color: var(--gold);
+            letter-spacing: .15em
+        }
+        .service h4 {
+            margin: 25px 0 6px;
+            font-size: 1rem
+        }
+        .service p {
+            color: var(--muted);
+            font-size: .78rem
+        }
+
+        .timeline {
+            border-left: 1px solid rgba(212, 168, 83, .25);
+            margin-left: 8px
+        }
+        .exp {
+            display: grid;
+            grid-template-columns: 190px 1fr;
+            gap: 30px;
+            padding: 0 0 40px 28px;
+            position: relative
+        }
+        .exp:before {
+            content: "";
+            position: absolute;
+            left: -5px;
+            top: 5px;
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background: var(--gold);
+            box-shadow: 0 0 0 5px rgba(212, 168, 83, .08)
+        }
+        .exp-year {
+            font-size: .65rem;
+            text-transform: uppercase;
+            letter-spacing: .12em;
+            color: var(--dim)
+        }
+        .exp h4 {
+            font-size: 1.25rem
+        }
+        .exp-role {
+            color: var(--gold);
+            font-size: .76rem;
+            margin: 4px 0 8px
+        }
+        .exp p {
+            color: var(--muted);
+            font-size: .88rem
+        }
+
+        .cta {
+            border: 1px solid rgba(212, 168, 83, .16);
+            background: radial-gradient(circle at 50% 0, rgba(212, 168, 83, .08), transparent 50%), var(--surface);
+            border-radius: 28px;
+            text-align: center;
+            padding: 70px 25px
+        }
+        .cta h3 {
+            font-size: clamp(2.4rem, 6vw, 5rem);
+            line-height: .95;
+            letter-spacing: -.05em
+        }
+        .cta h3 span {
+            color: var(--gold)
+        }
+        .cta p {
+            max-width: 600px;
+            margin: 18px auto 25px;
+            color: var(--muted)
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-top: 28px
+        }
+        .contact {
+            background: var(--surface);
+            border: 1px solid var(--line);
+            border-radius: 15px;
+            padding: 18px;
+            text-align: left;
+        }
+        .contact small {
+            display: block;
+            color: var(--dim);
+            font-size: .58rem;
+            letter-spacing: .14em;
+            text-transform: uppercase;
+            margin-bottom: 5px
+        }
+        .contact a,
+        .contact span {
+            font-size: .82rem;
+            word-break: break-word
+        }
+
+        .footer {
+            padding: 30px 0 40px;
+            border-top: 1px solid var(--line);
+            color: var(--dim);
+            font-size: .65rem;
+            text-align: center;
+            letter-spacing: .08em;
+            text-transform: uppercase
+        }
+
+        /* ===== MODAL ===== */
+        .modal {
+            position: fixed;
+            inset: 0;
+            z-index: 2000;
+            background: rgba(0, 0, 0, .78);
+            backdrop-filter: blur(12px);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 18px
+        }
+        .modal.open {
+            display: flex
+        }
+        .modal-box {
+            width: min(760px, 100%);
+            max-height: min(88svh, 850px);
+            overflow: auto;
+            background: #111318;
+            border: 1px solid var(--line);
+            border-radius: 22px;
+            padding: 30px;
+            position: relative;
+            box-shadow: 0 30px 100px rgba(0, 0, 0, .6)
+        }
+        .modal-box::-webkit-scrollbar {
+            width: 4px;
+        }
+        .modal-box::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .modal-box::-webkit-scrollbar-thumb {
+            background: var(--gold);
+            border-radius: 4px;
+        }
+        .close {
+            position: absolute;
+            right: 16px;
+            top: 16px;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1px solid var(--line);
+            background: var(--surface2);
+            color: var(--text);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: .25s var(--ease);
+        }
+        .close:hover {
+            border-color: var(--gold);
+            color: var(--gold);
+        }
+        .modal-cat {
+            font-size: .65rem;
+            text-transform: uppercase;
+            letter-spacing: .14em;
+            color: var(--gold)
+        }
+        .modal h3 {
+            font-size: 2rem;
+            line-height: 1.05;
+            margin: 7px 45px 25px 0
+        }
+        .modal-section {
+            margin: 22px 0
+        }
+        .modal-section h5 {
+            font-size: .65rem;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: var(--text);
+            margin-bottom: 6px
+        }
+        .modal-section p {
+            color: var(--muted);
+            font-size: .9rem
+        }
+        .features {
+            list-style: none;
+            display: grid;
+            gap: 7px
+        }
+        .features li {
+            color: var(--muted);
+            font-size: .85rem;
+            padding-left: 18px;
+            position: relative
+        }
+        .features li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--gold)
+        }
+        .modal-actions {
+            display: flex;
+            gap: 9px;
+            flex-wrap: wrap;
+            margin-top: 25px
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(22px);
+            transition: .8s var(--ease)
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: none
+        }
+
+        /* ============================================================
+           PRINT CV STYLES — A4 PERFECT
+           ============================================================ */
+        .cv-print-container {
+            display: none;
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            background: rgba(0, 0, 0, .7);
+            backdrop-filter: blur(12px);
+            padding: 30px;
+            overflow-y: auto;
+            align-items: center;
+            justify-content: center;
+        }
+        .cv-print-container.active {
+            display: flex;
+        }
+        .cv-print-container .cv-actions {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            display: flex;
+            gap: 12px;
+            z-index: 100;
+        }
+        .cv-print-container .cv-actions button {
+            padding: 12px 24px;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            border: none;
+            transition: .25s var(--ease);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, .3);
+        }
+        .cv-print-container .cv-actions .cv-close-btn {
+            background: #2a2a3e;
+            color: #fff;
+        }
+        .cv-print-container .cv-actions .cv-close-btn:hover {
+            background: #3a3a5e;
+        }
+        .cv-print-container .cv-actions .cv-download-btn {
+            background: #d4a853;
+            color: #08090b;
+        }
+        .cv-print-container .cv-actions .cv-download-btn:hover {
+            background: #e8c97a;
+            transform: scale(1.02);
+        }
+        .cv-print-container .cv-actions .cv-print-btn-action {
+            background: #56d68a;
+            color: #08090b;
+        }
+        .cv-print-container .cv-actions .cv-print-btn-action:hover {
+            background: #6de89a;
+            transform: scale(1.02);
+        }
+
+        /* A4 Page */
+        .cv-page {
+            width: 210mm;
+            min-height: 297mm;
+            max-height: 297mm;
+            background: #ffffff;
+            color: #1a1a2e;
+            font-family: 'Inter', system-ui, sans-serif;
+            padding: 18mm 16mm;
+            position: relative;
+            box-shadow: 0 20px 80px rgba(0, 0, 0, .5);
+            border-radius: 4px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* CV Header */
+        .cv-header {
+            display: grid;
+            grid-template-columns: 110px 1fr;
+            gap: 24px;
+            padding-bottom: 20px;
+            border-bottom: 3px solid #d4a853;
+            margin-bottom: 20px;
+            align-items: center;
+            flex-shrink: 0;
+        }
+        .cv-photo {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid #d4a853;
+            flex-shrink: 0;
+            background: #f0f0f0;
+        }
+        .cv-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .cv-photo-placeholder {
+            width: 110px;
+            height: 110px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #d4a853, #b68b38);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            font-weight: 900;
+            color: #fff;
+            flex-shrink: 0;
+            border: 3px solid #d4a853;
+        }
+        .cv-name-title h1 {
+            font-size: 28px;
+            font-weight: 900;
+            letter-spacing: -.02em;
+            color: #1a1a2e;
+            margin: 0;
+            line-height: 1.1;
+        }
+        .cv-name-title .cv-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #d4a853;
+            letter-spacing: .08em;
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+        .cv-contact-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 20px;
+            margin-top: 8px;
+            font-size: 11px;
+            color: #555;
+        }
+        .cv-contact-row a {
+            color: #1a1a2e;
+            text-decoration: none;
+        }
+        .cv-contact-row a:hover {
+            color: #d4a853;
+        }
+
+        /* CV Body */
+        .cv-body {
+            display: grid;
+            grid-template-columns: 1fr 2.2fr;
+            gap: 28px;
+            flex: 1;
+            min-height: 0;
+        }
+        .cv-sidebar {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        .cv-main {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .cv-section-title {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .12em;
+            color: #d4a853;
+            border-bottom: 2px solid #d4a853;
+            padding-bottom: 4px;
+            margin-bottom: 8px;
+        }
+
+        /* Summary */
+        .cv-summary p {
+            font-size: 12px;
+            line-height: 1.6;
+            color: #333;
+            margin: 0;
+        }
+
+        /* Skills */
+        .cv-skills-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        .cv-skills-list span {
+            font-size: 10px;
+            padding: 3px 10px;
+            border-radius: 999px;
+            background: #f5f5f5;
+            color: #333;
+            border: 1px solid #e0e0e0;
+        }
+
+        /* Experience */
+        .cv-exp-item {
+            margin-bottom: 12px;
+        }
+        .cv-exp-item:last-child {
+            margin-bottom: 0;
+        }
+        .cv-exp-item .cv-exp-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        .cv-exp-item .cv-exp-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+        .cv-exp-item .cv-exp-role {
+            font-size: 12px;
+            font-weight: 600;
+            color: #d4a853;
+        }
+        .cv-exp-item .cv-exp-date {
+            font-size: 10px;
+            color: #888;
+            font-weight: 500;
+        }
+        .cv-exp-item .cv-exp-desc {
+            font-size: 11px;
+            color: #444;
+            line-height: 1.5;
+            margin-top: 2px;
+        }
+
+        /* Projects */
+        .cv-project-item {
+            margin-bottom: 10px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        .cv-project-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .cv-project-item .cv-project-name {
+            font-size: 13px;
+            font-weight: 700;
+            color: #1a1a2e;
+        }
+        .cv-project-item .cv-project-cat {
+            font-size: 10px;
+            color: #d4a853;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: .06em;
+        }
+        .cv-project-item .cv-project-desc {
+            font-size: 11px;
+            color: #444;
+            line-height: 1.5;
+            margin-top: 2px;
+        }
+        .cv-project-item .cv-project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 3px;
+            margin-top: 3px;
+        }
+        .cv-project-item .cv-project-tech span {
+            font-size: 9px;
+            padding: 2px 8px;
+            border-radius: 999px;
+            background: #f0f0f0;
+            color: #555;
+        }
+
+        /* Contact sidebar */
+        .cv-contact-item {
+            font-size: 12px;
+            color: #333;
+            padding: 3px 0;
+        }
+        .cv-contact-item strong {
+            display: block;
+            font-size: 9px;
+            text-transform: uppercase;
+            letter-spacing: .08em;
+            color: #999;
+        }
+        .cv-contact-item a {
+            color: #1a1a2e;
+            text-decoration: none;
+            word-break: break-all;
+        }
+        .cv-contact-item a:hover {
+            color: #d4a853;
+        }
+
+        /* Capabilities list in sidebar */
+        .cv-cap-list {
+            font-size: 11px;
+            color: #444;
+            line-height: 1.7;
+        }
+        .cv-cap-list div {
+            padding: 2px 0;
+        }
+
+        /* ============================================================
+           PRINT MEDIA QUERY — A4 PERFECT
+           ============================================================ */
+        @media print {
+            body * {
+                visibility: hidden;
+            }
+            .cv-print-container,
+            .cv-print-container * {
+                visibility: visible;
+            }
+            .cv-print-container {
+                display: block !important;
+                position: static;
+                padding: 0;
+                background: #fff;
+                overflow: visible;
+                height: auto;
+                min-height: auto;
+            }
+            .cv-print-container .cv-actions {
+                display: none !important;
+            }
+            .cv-page {
+                width: 100%;
+                min-height: 100vh;
+                max-height: none;
+                padding: 18mm 16mm;
+                box-shadow: none;
+                border-radius: 0;
+                margin: 0 auto;
+            }
+            .cv-body {
+                min-height: auto;
+            }
+            .cv-photo {
+                width: 100px;
+                height: 100px;
+            }
+            .cv-photo-placeholder {
+                width: 100px;
+                height: 100px;
+                font-size: 36px;
+            }
+            .cv-header {
+                grid-template-columns: 100px 1fr;
+                gap: 20px;
+            }
+            .cv-name-title h1 {
+                font-size: 24px;
+            }
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media(max-width:900px) {
+            .hero-inner {
+                grid-template-columns: 1fr;
+                gap: 30px;
+                text-align: center
+            }
+            .hero-content {
+                order: 2
+            }
+            .avatar-wrapper {
+                justify-self: center;
+                width: 180px;
+                height: 180px;
+                order: 1
+            }
+            .hero-copy {
+                max-width: 100%
+            }
+            .hero-actions {
+                justify-content: center
+            }
+            .avatar-initials {
+                font-size: 4.2rem
+            }
+            .avatar-badge {
+                width: 34px;
+                height: 34px;
+                font-size: .9rem;
+                bottom: 4px;
+                right: 4px;
+            }
+            .avatar-badge svg {
+                width: 16px;
+                height: 16px;
+            }
+            .avatar-file-hint {
+                font-size: .5rem;
+                bottom: -24px;
+            }
+            .nav-links {
+                display: none;
+            }
+            .nav-cta {
+                display: none;
+            }
+            .menu {
+                display: block;
+            }
+            .section-head {
+                flex-direction: column;
+                align-items: start;
+                gap: 16px;
+            }
+            .section-desc {
+                max-width: 100%;
+            }
+            .identity {
+                grid-template-columns: 1fr;
+                gap: 35px
+            }
+            .services {
+                grid-template-columns: repeat(2, 1fr)
+            }
+            .projects {
+                grid-template-columns: 1fr
+            }
+            .contact-grid {
+                grid-template-columns: 1fr 1fr
+            }
+            .exp {
+                grid-template-columns: 1fr;
+                gap: 5px;
+                padding-left: 22px
+            }
+            /* CV responsive */
+            .cv-body {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+            .cv-header {
+                grid-template-columns: 1fr;
+                text-align: center;
+                gap: 12px;
+            }
+            .cv-photo,
+            .cv-photo-placeholder {
+                margin: 0 auto;
+                width: 90px;
+                height: 90px;
+            }
+            .cv-contact-row {
+                justify-content: center;
+            }
+            .cv-print-container .cv-actions {
+                position: fixed;
+                bottom: 16px;
+                top: auto;
+                right: 50%;
+                transform: translateX(50%);
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 8px;
+                width: calc(100% - 32px);
+            }
+            .cv-print-container .cv-actions button {
+                padding: 10px 16px;
+                font-size: 11px;
+                flex: 1;
+                min-width: 80px;
+                justify-content: center;
+            }
+            .cv-page {
+                width: 100%;
+                min-height: auto;
+                max-height: none;
+                padding: 14mm 12mm;
+                border-radius: 0;
+                margin: 0;
+            }
+        }
+
+        @media(max-width:700px) {
+            .container {
+                width: min(var(--max), calc(100% - 22px))
+            }
+            .section {
+                padding: 76px 0
+            }
+            .hero {
+                padding-top: 115px
+            }
+            .hero h1 {
+                font-size: clamp(3rem, 17vw, 5.2rem)
+            }
+            .hero h2 {
+                font-size: .72rem;
+                line-height: 1.8;
+                letter-spacing: .13em
+            }
+            .hero-copy {
+                font-size: .92rem
+            }
+            .hero-actions .btn {
+                width: 100%;
+                max-width: 300px
+            }
+            .avatar-wrapper {
+                width: 150px;
+                height: 150px
+            }
+            .avatar-initials {
+                font-size: 3.6rem
+            }
+            .services {
+                grid-template-columns: 1fr
+            }
+            .contact-grid {
+                grid-template-columns: 1fr
+            }
+            .card {
+                padding: 20px
+            }
+            .card h4 {
+                font-size: 1.3rem
+            }
+            .modal-box {
+                padding: 22px 18px;
+                border-radius: 18px
+            }
+            .modal h3 {
+                font-size: 1.55rem
+            }
+            .nav {
+                width: calc(100% - 16px);
+                top: 10px;
+                height: 54px;
+                padding: 0 10px 0 16px;
+            }
+            .nav-links.mobile-open {
+                top: calc(10px + 54px + 8px);
+                width: calc(100% - 32px);
+            }
+            .cv-page {
+                padding: 10mm 8mm;
+            }
+            .cv-body {
+                gap: 14px;
+            }
+            .cv-header {
+                gap: 10px;
+                padding-bottom: 14px;
+            }
+            .cv-name-title h1 {
+                font-size: 22px;
+            }
+            .cv-name-title .cv-title {
+                font-size: 12px;
+            }
+            .cv-contact-row {
+                font-size: 10px;
+                gap: 6px 12px;
+            }
+            .cv-print-container {
+                padding: 12px;
+            }
+        }
+
+        @media(max-width:380px) {
+            .hero h1 {
+                font-size: 2.8rem
+            }
+            .section-title {
+                font-size: 2rem
+            }
+            .avatar-wrapper {
+                width: 120px;
+                height: 120px
+            }
+            .avatar-initials {
+                font-size: 2.8rem
+            }
+            .avatar-badge {
+                width: 28px;
+                height: 28px;
+                bottom: 2px;
+                right: 2px;
+            }
+            .avatar-badge svg {
+                width: 12px;
+                height: 12px;
+            }
+            .avatar-status {
+                width: 10px;
+                height: 10px;
+                bottom: 10px;
+                right: -4px;
+            }
+            .avatar-file-hint {
+                font-size: .45rem;
+                bottom: -20px;
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            html {
+                scroll-behavior: auto
+            }
+            *,
+            *:before,
+            *:after {
+                animation: none !important;
+                transition-duration: .01ms !important
+            }
+            .reveal {
+                opacity: 1;
+                transform: none
+            }
+            .avatar-ring {
+                animation: none;
+                opacity: .2;
+            }
+            .avatar-ring-glow {
+                animation: none;
+                opacity: .3;
+            }
+            .avatar-shimmer {
+                animation: none;
+                opacity: .1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <a class="skip" href="#main">Skip to content</a>
+    <div class="progress" id="progress"></div>
+
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <header class="nav" id="nav">
+        <a class="logo" href="#home" aria-label="Guled Hassen home">GH<span>.</span></a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <a class="nav-cta" href="mailto:guledh918@gmail.com">Let's Talk</a>
+        <button class="menu" id="menu" aria-label="Open navigation" aria-expanded="false">
+            <span></span><span></span><span></span>
+        </button>
+    </header>
+
+    <main id="main">
+        <section class="hero" id="home">
+            <div class="hero-inner">
+                <div class="hero-content">
+                    <div class="eyebrow">Engineer · Digital Creator · Developer</div>
+                    <h1>GULED<br>HASSEN</h1>
+                    <h2>Engineering <b>ideas</b> into digital experiences, systems & practical solutions.</h2>
+                    <p class="hero-copy">A multidisciplinary portfolio spanning engineering, web development, digital products, business digitalization, UI/UX and creative technology.</p>
+                    <div class="hero-actions">
+                        <a class="btn btn-primary" href="#projects">Explore Projects</a>
+                        <a class="btn btn-ghost" href="mailto:guledh918@gmail.com">Start a Project</a>
+                        <button class="btn btn-print" id="printCvBtn">📄 CV</button>
+                    </div>
+                </div>
+
+                <!-- ===== PROFILE PICTURE ===== -->
+                <div class="avatar-wrapper">
+                    <div class="avatar-ring-glow"></div>
+                    <div class="avatar-ring"></div>
+                    <div class="avatar" id="avatarContainer">
+                        <!-- The src is set to 'profile.jpg' by default — place your photo as 'profile.jpg' in the same folder -->
+                        <img id="avatarImg" src="profile.jpg" alt="Guled Hassen" />
+                        <span class="avatar-initials" id="avatarInitials">GH</span>
+                        <div class="avatar-shimmer"></div>
+                        <div class="avatar-dots"></div>
+                    </div>
+                    <input type="file" id="avatarUpload" accept="image/*" style="display:none;">
+                    <button class="avatar-badge" id="avatarBadge" aria-label="Upload profile picture" type="button">
+                        <svg viewBox="0 0 24 24" width="18" height="18">
+                            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                            <circle cx="12" cy="13" r="4" />
+                        </svg>
+                    </button>
+                    <div class="avatar-status" aria-label="Available for projects"></div>
+                    <div class="avatar-file-hint">profile.jpg</div>
+                </div>
+            </div>
+            <div class="scroll">Scroll</div>
+        </section>
+
+        <section class="section reveal" id="about">
+            <div class="container">
+                <div class="section-head">
+                    <div><div class="section-label">01 · Identity</div><h3 class="section-title">Think.<br>Build.<br><span style="color:var(--gold)">Transform.</span></h3></div>
+                    <p class="section-desc">Engineering thinking applied to digital products, business systems and practical technology.</p>
+                </div>
+                <div class="identity">
+                    <div class="identity-word">ENGINEER<br><span class="gold">DIGITAL</span><br><span class="dim">BUILDER</span></div>
+                    <div class="identity-copy">
+                        <p><strong>Guled Hassen</strong> is a multidisciplinary engineer, digital creator and developer who bridges engineering problem-solving with digital product craft.</p>
+                        <p>The work combines web development, UI/UX, digital marketing, branding, business systems and engineering coordination with a practical focus on useful outcomes.</p>
+                        <div class="tags">
+                            <span class="tag">Mechanical Engineering</span><span class="tag">Web Development</span><span class="tag">UI/UX</span>
+                            <span class="tag">Digital Marketing</span><span class="tag">Dashboards</span><span class="tag">Business Digitalization</span>
+                            <span class="tag">Hospitality Technology</span><span class="tag">Systems Thinking</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section reveal" id="projects">
+            <div class="container">
+                <div class="section-head">
+                    <div><div class="section-label">02 · Selected Work</div><h3 class="section-title">Project <span style="color:var(--gold)">Command</span> Center</h3></div>
+                    <p class="section-desc">Live digital products, portfolio systems and cultural/business experiences. Filter the work by category.</p>
+                </div>
+                <div class="project-toolbar" id="filters"></div>
+                <div class="projects" id="projectsGrid"></div>
+            </div>
+        </section>
+
+        <section class="section reveal" id="services">
+            <div class="container">
+                <div class="section-head">
+                    <div><div class="section-label">03 · Capabilities</div><h3 class="section-title">What Drives<br>the Work</h3></div>
+                    <p class="section-desc">A practical multidisciplinary toolkit for organizations, businesses, professionals and digital products.</p>
+                </div>
+                <div class="services" id="servicesGrid"></div>
+            </div>
+        </section>
+
+        <section class="section reveal" id="experience">
+            <div class="container">
+                <div class="section-head">
+                    <div><div class="section-label">04 · Background</div><h3 class="section-title">Multidisciplinary<br><span style="color:var(--gold)">Experience</span></h3></div>
+                    <p class="section-desc">A professional path connecting engineering, infrastructure, business digitalization and creative technology.</p>
+                </div>
+                <div class="timeline" id="experienceGrid"></div>
+            </div>
+        </section>
+
+        <section class="section reveal" id="contact">
+            <div class="container">
+                <div class="cta">
+                    <div class="section-label">05 · Contact</div>
+                    <h3>LET'S BUILD<br><span>SOMETHING USEFUL.</span></h3>
+                    <p>For a website, digital platform, business system, hospitality solution, engineering technology project or collaboration, get in touch.</p>
+                    <a class="btn btn-primary" href="mailto:guledh918@gmail.com">Contact Guled Hassen</a>
+                    <div class="contact-grid">
+                        <div class="contact"><small>Email</small><a href="mailto:guledh918@gmail.com">guledh918@gmail.com</a></div>
+                        <div class="contact"><small>Phone</small><a href="tel:+251915415011">+251 915 415 011</a></div>
+                        <div class="contact"><small>LinkedIn</small><a href="https://www.linkedin.com/in/guled-hassen-b11636250" target="_blank" rel="noopener">in/guled-hassen</a></div>
+                        <div class="contact"><small>Portfolio</small><a href="https://guledz.github.io/Portfolio/" target="_blank" rel="noopener">guledz.github.io</a></div>
+                        <div class="contact"><small>Telegram</small><a href="https://t.me/adaldigitalmarket" target="_blank" rel="noopener">@adaldigitalmarket</a></div>
+                        <div class="contact"><small>Location</small><span>Ethiopia</span></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">© <span id="year"></span> Guled Hassen · Engineer · Digital Creator · Developer</footer>
+
+    <!-- ===== MODAL ===== -->
+    <div class="modal" id="modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-box">
+            <button class="close" id="closeModal" aria-label="Close case study">×</button>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <!-- ===== PRINT CV CONTAINER — A4 PERFECT ===== -->
+    <div class="cv-print-container" id="cvPrintContainer">
+        <div class="cv-actions">
+            <button class="cv-close-btn" id="cvCloseBtn">✕ Close</button>
+            <button class="cv-print-btn-action" id="cvPrintBtn">🖨️ Print</button>
+            <button class="cv-download-btn" id="cvDownloadBtn">⬇️ Download PDF</button>
+        </div>
+        <div class="cv-page" id="cvPage">
+            <!-- Dynamically populated -->
+        </div>
+    </div>
+
+    <script>
+        (() => {
+            'use strict';
+
+            // ===== DATA =====
+            const projects = [{
+                id: 'amud-motel-command-center',
+                name: 'Amud Motel Command Center',
+                category: 'Hospitality',
+                status: 'live',
+                featured: true,
+                description: 'A hospitality-focused digital command center concept for motel services, customer experience, structured business information and digital management.',
+                live: 'https://guledz.github.io/Amud-Motel-Command-Center-/',
+                tech: ['HTML5', 'CSS3', 'JavaScript', 'Responsive UI', 'UI/UX'],
+                industry: 'Hospitality / Web Development / Business Systems',
+                overview: 'A comprehensive digital solution concept for hospitality operations, consolidating services, customer touchpoints and structured business information into one responsive interface.',
+                problem: 'Traditional motel operations can depend on fragmented manual processes for services, guest information and business data.',
+                solution: 'Designed a responsive command-center interface prioritizing clarity, accessibility and practical usability for hospitality staff and management.',
+                features: ['Centralized motel service dashboard', 'Customer experience information architecture',
+                    'Structured business data presentation', 'Responsive design', 'Hospitality-focused UI',
+                    'Booking and contact pathway integration'
+                ],
+                outcome: 'A working portfolio demonstration of digital transformation possibilities for motel and hotel environments.'
+            }, {
+                id: 'adal-digital-marketing',
+                name: 'ADAL Digital Marketing',
+                category: 'Digital Marketing',
+                status: 'live',
+                featured: true,
+                description: 'A digital marketing and business-management platform demonstrating dashboard design, service organization and business information architecture.',
+                live: 'https://guledz.github.io/adal-digital-marketing-dashboard/',
+                tech: ['HTML5', 'CSS3', 'JavaScript', 'Dashboard Architecture', 'Responsive Design'],
+                industry: 'Digital Marketing / Web Development / Business Systems',
+                overview: 'A business platform combining digital marketing presentation with a modern dashboard-style information architecture.',
+                problem: 'Marketing businesses need to communicate service value while presenting structured operational information.',
+                solution: 'Developed a dashboard interface focused on hierarchy, data presentation, service organization and user experience.',
+                features: ['Modern marketing dashboard', 'Digital service organization',
+                    'Business information architecture', 'Responsive web development',
+                    'Data-driven interface components', 'Professional visual communication'
+                ],
+                outcome: 'A working demonstration of how marketing businesses can combine public-facing communication with structured digital operations.'
+            }, {
+                id: 'adal-harar-digital-art-gallery',
+                name: 'ADAL Harar Digital Art Gallery',
+                category: 'Culture & Tourism',
+                status: 'live',
+                featured: true,
+                description: "A digital cultural gallery presenting Harar's living heritage through contemporary visual storytelling and an immersive web experience.",
+                live: 'https://hararvolunteer.github.io/Adal-/',
+                tech: ['HTML5', 'CSS3', 'JavaScript', 'Visual Storytelling', 'Responsive Design'],
+                industry: 'Culture / Tourism / Digital Experience',
+                overview: "A cultural platform designed to present Harar's living heritage through contemporary digital storytelling.",
+                problem: 'Cultural heritage and tourism destinations need modern digital experiences capable of communicating visual richness to wider audiences.',
+                solution: 'Built an image-rich responsive gallery combining cultural presentation, visual storytelling and modern UI/UX.',
+                features: ['Immersive digital gallery', 'Cultural heritage presentation', 'Visual storytelling',
+                    'Responsive experience', 'Tourism-focused UX', 'Modern UI/UX'
+                ],
+                outcome: 'A digital cultural experience connecting heritage with contemporary web technology.'
+            }, {
+                id: 'portfolio-readiness-command-center',
+                name: 'Portfolio Readiness Command Center',
+                category: 'Dashboards',
+                status: 'live',
+                featured: true,
+                description: 'A structured command center for organizing professional projects, skills, opportunities, readiness and portfolio development.',
+                live: 'https://guledz.github.io/Portfolio-Readiness-Command-Center/',
+                tech: ['HTML5', 'CSS3', 'JavaScript', 'Dashboard Design', 'Data Organization'],
+                industry: 'Productivity / Dashboard / Digital Management',
+                overview: 'A productivity dashboard for tracking portfolio projects, skills development, opportunities and career readiness.',
+                problem: 'Professionals often need a more visual and interactive way to organize projects, skills and opportunities than basic documents or spreadsheets.',
+                solution: 'Designed a command-center interface using visual hierarchy, structured information and interactive dashboard components.',
+                features: ['Project tracking', 'Skills and readiness assessment', 'Opportunity management',
+                    'Structured data visualization', 'Interactive dashboard components', 'Responsive application'
+                ],
+                outcome: 'A functional portfolio-management demonstration showing practical dashboard and management-system development.'
+            }, {
+                id: 'adal-digital-embassy',
+                name: 'Adal Digital Embassy',
+                category: 'Digital Platform',
+                status: 'live',
+                featured: true,
+                description: 'A digital platform concept focused on structured online presence, information access and modern digital communication.',
+                live: 'https://guledz.github.io/Adal-digital-embassy/',
+                tech: ['HTML5', 'CSS3', 'JavaScript', 'UI/UX', 'Responsive Design'],
+                industry: 'Digital Platform / Communication',
+                overview: 'A digital product in the Adal project family, demonstrating structured information presentation and modern web experience design.',
+                problem: 'Organizations and initiatives need clear digital spaces that make information easier to discover and communicate.',
+                solution: 'Created a responsive web experience with a structured information architecture and professional visual system.',
+                features: ['Structured digital information', 'Responsive interface', 'Modern visual hierarchy',
+                    'Clear navigation', 'Digital communication pathways'
+                ],
+                outcome: 'A portfolio example of digital platform design and information architecture.'
+            }, {
+                id: 'personal-portfolio',
+                name: 'Personal Portfolio',
+                category: 'Web Development',
+                status: 'live',
+                description: "Professional portfolio presenting Guled Hassen's multidisciplinary experience, projects, capabilities and digital work.",
+                live: 'https://guledz.github.io/Portfolio/',
+                tech: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design', 'UI/UX'],
+                industry: 'Personal Brand / Web Development',
+                overview: 'A professional portfolio system for communicating multidisciplinary work across engineering, digital products and business technology.',
+                problem: 'Professionals need a credible online presence that communicates experience and demonstrates actual work.',
+                solution: 'Built a project-focused portfolio with clear information architecture, responsive design and direct contact pathways.',
+                features: ['Project showcase', 'Professional information architecture', 'Responsive design',
+                    'Modern UI/UX', 'Contact pathways'
+                ],
+                outcome: 'A professional online presence and a living demonstration of web-development capability.'
+            }, {
+                id: 'digital-cv',
+                name: 'Digital CV',
+                category: 'Professional Profile',
+                status: 'live',
+                description: 'An interactive digital CV presenting professional experience, technical capabilities, education, projects and career direction.',
+                live: 'https://guledz.github.io/Mycv/',
+                tech: ['HTML5', 'CSS3', 'JavaScript', 'Responsive Design'],
+                industry: 'Professional Profile / Web Development',
+                overview: 'A web-native CV designed to communicate professional information while demonstrating frontend development capability.',
+                problem: 'Static CV documents have limited ability to demonstrate interactive digital skills and provide a richer professional experience.',
+                solution: 'Created an accessible interactive CV in a modern web format.',
+                features: ['Interactive CV format', 'Professional information presentation', 'Responsive design',
+                    'Modern web development', 'Accessible interface'
+                ],
+                outcome: 'A digital professional profile that also functions as a web-development demonstration.'
+            }];
+
+            const services = [
+                ['01', 'Web Development', 'Responsive websites and web applications built around real business and user needs.'],
+                ['02', 'Business Websites', 'Corporate, service, hospitality, restaurant and professional websites.'],
+                ['03', 'UI/UX', 'User-focused interfaces, information architecture and digital experiences.'],
+                ['04', 'Business Dashboards', 'Management dashboards and command centers for operational clarity.'],
+                ['05', 'Digital Marketing', 'SEO, Google business presence, social media, branding and digital strategy.'],
+                ['06', 'Business Digitalization', 'Turning manual business processes into structured digital systems.'],
+                ['07', 'Hospitality Technology', 'Digital experiences for hotels, motels, restaurants and accommodation businesses.'],
+                ['08', 'Engineering Technology', 'Engineering thinking applied to technical systems, documentation and practical digital solutions.'],
+                ['09', 'Brand & Creative Systems', 'Branding, visual communication and digital content systems.']
+            ];
+
+            const experience = [
+                ['Education', 'Mechanical Engineering — BSc', 'Jimma Institute of Technology',
+                    'Engineering principles, systems thinking and technical problem-solving.'
+                ],
+                ['Infrastructure & Engineering', 'Professional Engineering Experience', 'Infrastructure Development & Coordination',
+                    'Infrastructure development, engineering coordination, technical documentation and project systems.'
+                ],
+                ['Digital Solutions', 'Founder / CEO — ADAL Digital Marketing', 'Digital Marketing & Web Development',
+                    'Digital marketing, web development and business digitalization services.'
+                ],
+                ['Engineering Technology', 'Founder & CEO — Odaa Engineering', 'Engineering Solutions & Systems',
+                    'Engineering solutions, systems design and practical implementation.'
+                ]
+            ];
+
+            // ===== DOM HELPERS =====
+            const $ = s => document.querySelector(s);
+            const $$ = s => [...document.querySelectorAll(s)];
+
+            // ============================================================
+            // PROFILE IMAGE HANDLING — External file + upload fallback
+            // ============================================================
+            function getProfileImageSrc() {
+                // Check if user uploaded a photo (stored as data URL)
+                const saved = localStorage.getItem('gh_avatar_data');
+                if (saved && saved.startsWith('data:image')) {
+                    return saved;
+                }
+                // Fallback: external file in same directory
+                return 'profile.jpg';
+            }
+
+            function isUploadedImage() {
+                const saved = localStorage.getItem('gh_avatar_data');
+                return saved && saved.startsWith('data:image');
+            }
+
+            function updateAvatarImage() {
+                const img = document.getElementById('avatarImg');
+                const initials = document.getElementById('avatarInitials');
+                const src = getProfileImageSrc();
+
+                img.src = src;
+                img.onload = function() {
+                    img.classList.remove('hidden');
+                    initials.classList.add('hidden');
+                };
+                img.onerror = function() {
+                    // If image fails to load, show initials
+                    img.classList.add('hidden');
+                    initials.classList.remove('hidden');
+                };
+
+                // If it's a data URL (uploaded), it will load immediately
+                if (src.startsWith('data:image')) {
+                    img.classList.remove('hidden');
+                    initials.classList.add('hidden');
+                } else {
+                    // For external file, let the onload/onerror handle it
+                    // But if it's already cached, onload may fire synchronously
+                    if (img.complete && img.naturalWidth > 0) {
+                        img.classList.remove('hidden');
+                        initials.classList.add('hidden');
+                    }
+                }
+            }
+
+            function handleAvatarUpload(file) {
+                const reader = new FileReader();
+                reader.onload = function(ev) {
+                    const dataUrl = ev.target.result;
+                    localStorage.setItem('gh_avatar_data', dataUrl);
+                    updateAvatarImage();
+                };
+                reader.readAsDataURL(file);
+            }
+
+            // ===== AVATAR UPLOAD UI =====
+            function initAvatarUpload() {
+                const input = document.getElementById('avatarUpload');
+                const badge = document.getElementById('avatarBadge');
+
+                // Initialize with external file or saved upload
+                updateAvatarImage();
+
+                badge.addEventListener('click', () => input.click());
+
+                input.addEventListener('change', function(e) {
+                    const file = this.files[0];
+                    if (!file) return;
+                    handleAvatarUpload(file);
+                    // Reset input so the same file can be re-uploaded
+                    this.value = '';
+                });
+
+                // Double-click on avatar to clear uploaded image and revert to external file
+                const container = document.getElementById('avatarContainer');
+                container.addEventListener('dblclick', function(e) {
+                    if (isUploadedImage()) {
+                        localStorage.removeItem('gh_avatar_data');
+                        updateAvatarImage();
+                    }
+                });
+            }
+
+            // ===== RENDER FUNCTIONS =====
+            function renderFilters() {
+                const categories = ['All', ...new Set(projects.map(p => p.category))];
+                $('#filters').innerHTML = categories.map((c, i) =>
+                    `<button class="filter ${i===0?'active':''}" data-filter="${escapeHTML(c)}">${escapeHTML(c)}</button>`
+                ).join('');
+                $$('.filter').forEach(btn => btn.addEventListener('click', () => {
+                    $$('.filter').forEach(x => x.classList.remove('active'));
+                    btn.classList.add('active');
+                    renderProjects(btn.dataset.filter);
+                }));
+            }
+
+            function renderProjects(filter = 'All') {
+                const list = filter === 'All' ? projects : projects.filter(p => p.category === filter);
+                $('#projectsGrid').innerHTML = list.map((p, i) => `
+                            <article class="card reveal visible">
+                                <div class="card-top">
+                                    <span class="number">${String(i+1).padStart(2,'0')}</span>
+                                    <span class="status ${p.status==='concept'?'concept':p.status==='development'?'development':''}">${p.status==='live'?'LIVE':p.status==='development'?'IN DEV':'CONCEPT'}</span>
+                                </div>
+                                <h4>${escapeHTML(p.name)}</h4>
+                                <div class="category">${escapeHTML(p.category)}</div>
+                                <p>${escapeHTML(p.description)}</p>
+                                <div class="techs">${p.tech.map(t=>`<span>${escapeHTML(t)}</span>`).join('')}</div>
+                                <div class="card-actions">
+                                    <button class="case-btn" data-id="${escapeHTML(p.id)}">Case Study →</button>
+                                    ${p.live?`<a class="live-btn" href="${p.live}" target="_blank" rel="noopener noreferrer">Live Project ↗</a>`:''}
+                                </div>
+                            </article>
+                        `).join('');
+                $$('.case-btn').forEach(btn => btn.addEventListener('click', () => openModal(btn.dataset.id)));
+            }
+
+            function renderServices() {
+                $('#servicesGrid').innerHTML = services.map(s => `
+                            <article class="service reveal visible">
+                                <div class="service-num">${s[0]}</div>
+                                <h4>${escapeHTML(s[1])}</h4>
+                                <p>${escapeHTML(s[2])}</p>
+                            </article>
+                        `).join('');
+            }
+
+            function renderExperience() {
+                $('#experienceGrid').innerHTML = experience.map(e => `
+                            <article class="exp reveal visible">
+                                <div class="exp-year">${escapeHTML(e[0])}</div>
+                                <div>
+                                    <h4>${escapeHTML(e[1])}</h4>
+                                    <div class="exp-role">${escapeHTML(e[2])}</div>
+                                    <p>${escapeHTML(e[3])}</p>
+                                </div>
+                            </article>
+                        `).join('');
+            }
+
+            function escapeHTML(value) {
+                return String(value).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;',
+                    "'": '&#039;' }[c]));
+            }
+
+            // ===== MODAL =====
+            let lastFocused = null;
+
+            function openModal(id) {
+                const p = projects.find(x => x.id === id);
+                if (!p) return;
+                lastFocused = document.activeElement;
+                $('#modalContent').innerHTML = `
+                            <div class="modal-cat">${escapeHTML(p.industry)}</div>
+                            <h3 id="modalTitle">${escapeHTML(p.name)}</h3>
+                            <div class="modal-section"><h5>Overview</h5><p>${escapeHTML(p.overview)}</p></div>
+                            <div class="modal-section"><h5>Challenge</h5><p>${escapeHTML(p.problem)}</p></div>
+                            <div class="modal-section"><h5>Approach & Solution</h5><p>${escapeHTML(p.solution)}</p></div>
+                            <div class="modal-section"><h5>Key Features</h5><ul class="features">${p.features.map(f=>`<li>${escapeHTML(f)}</li>`).join('')}</ul></div>
+                            <div class="modal-section"><h5>Technologies</h5><div class="techs">${p.tech.map(t=>`<span>${escapeHTML(t)}</span>`).join('')}</div></div>
+                            <div class="modal-section"><h5>Outcome</h5><p>${escapeHTML(p.outcome)}</p></div>
+                            <div class="modal-actions">
+                                ${p.live?`<a class="btn btn-primary" href="${p.live}" target="_blank" rel="noopener noreferrer">Open Live Project ↗</a>`:''}
+                                <button class="btn btn-ghost" id="modalCloseSecondary">Close</button>
+                            </div>
+                        `;
+                $('#modal').classList.add('open');
+                $('#modal').setAttribute('aria-hidden', 'false');
+                document.body.classList.add('locked');
+                $('#closeModal').focus();
+                $('#modalCloseSecondary').addEventListener('click', closeModal);
+            }
+
+            function closeModal() {
+                $('#modal').classList.remove('open');
+                $('#modal').setAttribute('aria-hidden', 'true');
+                document.body.classList.remove('locked');
+                if (lastFocused && typeof lastFocused.focus === 'function') lastFocused.focus();
+            }
+
+            $('#closeModal').addEventListener('click', closeModal);
+            $('#modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal() });
+            document.addEventListener('keydown', e => { if (e.key === 'Escape' && $('#modal').classList.contains('open'))
+                    closeModal() });
+
+            // ===== MOBILE NAV =====
+            const menu = $('#menu');
+            const nav = $('#nav');
+            const links = $('#navLinks');
+            const overlay = $('#mobileOverlay');
+
+            function closeNav() {
+                links.classList.remove('mobile-open');
+                overlay.classList.remove('open');
+                menu.classList.remove('active');
+                menu.setAttribute('aria-expanded', 'false');
+                document.body.classList.remove('locked');
+            }
+
+            function openNav() {
+                links.classList.add('mobile-open');
+                overlay.classList.add('open');
+                menu.classList.add('active');
+                menu.setAttribute('aria-expanded', 'true');
+                document.body.classList.add('locked');
+            }
+
+            menu.addEventListener('click', () => {
+                if (links.classList.contains('mobile-open')) {
+                    closeNav();
+                } else {
+                    openNav();
+                }
+            });
+
+            overlay.addEventListener('click', closeNav);
+
+            links.addEventListener('click', (e) => {
+                if (e.target.matches('a')) {
+                    closeNav();
+                }
+            });
+
+            window.addEventListener('resize', () => {
+                if (innerWidth > 900 && links.classList.contains('mobile-open')) {
+                    closeNav();
+                }
+            });
+
+            // ===== SCROLL REVEAL =====
+            function initReveal() {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: .1, rootMargin: '0px 0px -30px' });
+                $$('.reveal').forEach(el => observer.observe(el));
+            }
+
+            // ===== SCROLL SPY =====
+            function initScrollSpy() {
+                const sections = $$('main section[id]');
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            $$('.nav-links a').forEach(a => {
+                                a.classList.toggle('active', a.getAttribute('href') === '#' + entry
+                                .target.id);
+                            });
+                        }
+                    });
+                }, { rootMargin: '-45% 0px -45% 0px' });
+                sections.forEach(s => observer.observe(s));
+            }
+
+            // ===== PROGRESS BAR =====
+            function initProgress() {
+                const update = () => {
+                    const max = document.documentElement.scrollHeight - window.innerHeight;
+                    const progress = max > 0 ? (window.scrollY / max) * 100 : 0;
+                    $('#progress').style.width = progress + '%';
+                };
+                window.addEventListener('scroll', update, { passive: true });
+                window.addEventListener('resize', update, { passive: true });
+                update();
+            }
+
+            // ============================================================
+            // A4 PERFECT PRINT CV FUNCTIONALITY
+            // ============================================================
+            function buildCVHTML(photoSrc) {
+                const contactInfo = [
+                    { label: 'Email', value: 'guledh918@gmail.com', link: 'mailto:guledh918@gmail.com' },
+                    { label: 'Phone', value: '+251 915 415 011', link: 'tel:+251915415011' },
+                    { label: 'Location', value: 'Ethiopia', link: null },
+                    { label: 'LinkedIn', value: 'in/guled-hassen', link: 'https://www.linkedin.com/in/guled-hassen-b11636250' },
+                    { label: 'Portfolio', value: 'guledz.github.io', link: 'https://guledz.github.io/Portfolio/' },
+                    { label: 'Telegram', value: '@adaldigitalmarket', link: 'https://t.me/adaldigitalmarket' }
+                ];
+
+                const allTags = ['Mechanical Engineering', 'Web Development', 'UI/UX', 'Digital Marketing',
+                    'Dashboards', 'Business Digitalization', 'Hospitality Technology', 'Systems Thinking'
+                ];
+
+                // Use the provided photo source
+                const photoHTML = photoSrc ?
+                    `<img src="${photoSrc}" alt="Guled Hassen" />` :
+                    `<div class="cv-photo-placeholder">GH</div>`;
+
+                // Show top 4 projects
+                const projectsHTML = projects.slice(0, 4).map(p => `
+                            <div class="cv-project-item">
+                                <div class="cv-project-name">${escapeHTML(p.name)}</div>
+                                <div class="cv-project-cat">${escapeHTML(p.category)}</div>
+                                <div class="cv-project-desc">${escapeHTML(p.description)}</div>
+                                <div class="cv-project-tech">${p.tech.map(t=>`<span>${escapeHTML(t)}</span>`).join('')}</div>
+                            </div>
+                        `).join('');
+
+                const expHTML = experience.map(e => `
+                            <div class="cv-exp-item">
+                                <div class="cv-exp-header">
+                                    <span class="cv-exp-title">${escapeHTML(e[1])}</span>
+                                    <span class="cv-exp-date">${escapeHTML(e[0])}</span>
+                                </div>
+                                <div class="cv-exp-role">${escapeHTML(e[2])}</div>
+                                <div class="cv-exp-desc">${escapeHTML(e[3])}</div>
+                            </div>
+                        `).join('');
+
+                const contactHTML = contactInfo.map(c => `
+                            <div class="cv-contact-item">
+                                <strong>${escapeHTML(c.label)}</strong>
+                                ${c.link ? `<a href="${c.link}" target="_blank">${escapeHTML(c.value)}</a>` : escapeHTML(c.value)}
+                            </div>
+                        `).join('');
+
+                const skillsHTML = allTags.map(t => `<span>${escapeHTML(t)}</span>`).join('');
+                const capsHTML = services.map(s => `<div>• ${escapeHTML(s[1])}</div>`).join('');
+
+                return `
+                            <div class="cv-header">
+                                <div class="cv-photo">${photoHTML}</div>
+                                <div class="cv-name-title">
+                                    <h1>GULED HASSEN</h1>
+                                    <div class="cv-title">Engineer · Digital Creator · Developer</div>
+                                    <div class="cv-contact-row">
+                                        <span>📧 guledh918@gmail.com</span>
+                                        <span>📱 +251 915 415 011</span>
+                                        <span>📍 Ethiopia</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="cv-body">
+                                <div class="cv-sidebar">
+                                    <div>
+                                        <div class="cv-section-title">Contact</div>
+                                        ${contactHTML}
+                                    </div>
+                                    <div>
+                                        <div class="cv-section-title">Skills</div>
+                                        <div class="cv-skills-list">${skillsHTML}</div>
+                                    </div>
+                                    <div>
+                                        <div class="cv-section-title">Capabilities</div>
+                                        <div class="cv-cap-list">${capsHTML}</div>
+                                    </div>
+                                </div>
+                                <div class="cv-main">
+                                    <div class="cv-summary">
+                                        <div class="cv-section-title">Professional Summary</div>
+                                        <p>Multidisciplinary engineer, digital creator and developer bridging engineering problem-solving with digital product craft. Combines web development, UI/UX, digital marketing, branding, business systems and engineering coordination with a practical focus on useful outcomes.</p>
+                                    </div>
+                                    <div>
+                                        <div class="cv-section-title">Experience</div>
+                                        ${expHTML}
+                                    </div>
+                                    <div>
+                                        <div class="cv-section-title">Selected Projects</div>
+                                        ${projectsHTML}
+                                    </div>
+                                </div>
+                            </div>
+                        `;
+            }
+
+            // ===== OPEN / CLOSE CV =====
+            function openCVPrint() {
+                const container = document.getElementById('cvPrintContainer');
+                const page = document.getElementById('cvPage');
+                // Get the current image source (either uploaded data URL or external file)
+                const photoSrc = getProfileImageSrc();
+
+                page.innerHTML = buildCVHTML(photoSrc);
+                container.classList.add('active');
+                document.body.classList.add('locked');
+                window.scrollTo(0, 0);
+            }
+
+            function closeCVPrint() {
+                const container = document.getElementById('cvPrintContainer');
+                container.classList.remove('active');
+                document.body.classList.remove('locked');
+            }
+
+            // ===== PRINT =====
+            function printCV() {
+                window.print();
+            }
+
+            // ===== DOWNLOAD PDF =====
+            function downloadPDF() {
+                const page = document.getElementById('cvPage');
+                // Temporarily remove the shadow and border-radius for clean capture
+                const origBoxShadow = page.style.boxShadow;
+                const origBorderRadius = page.style.borderRadius;
+                page.style.boxShadow = 'none';
+                page.style.borderRadius = '0';
+
+                html2canvas(page, {
+                    scale: 2,
+                    useCORS: true,
+                    allowTaint: true,
+                    backgroundColor: '#ffffff',
+                    logging: false,
+                    width: 794, // A4 width at 96dpi ~ 794px
+                    height: 1123, // A4 height at 96dpi ~ 1123px
+                }).then(canvas => {
+                    // Restore styles
+                    page.style.boxShadow = origBoxShadow;
+                    page.style.borderRadius = origBorderRadius;
+
+                    const link = document.createElement('a');
+                    link.download = 'Guled_Hassen_CV.pdf';
+                    link.href = canvas.toDataURL('image/pdf');
+                    link.click();
+                }).catch(err => {
+                    console.warn('PDF generation failed, falling back to print:', err);
+                    // Restore styles
+                    page.style.boxShadow = origBoxShadow;
+                    page.style.borderRadius = origBorderRadius;
+                    // Fallback: open print dialog
+                    window.print();
+                });
+            }
+
+            // ===== INIT =====
+            $('#year').textContent = new Date().getFullYear();
+
+            // CV buttons
+            document.getElementById('printCvBtn').addEventListener('click', openCVPrint);
+            document.getElementById('cvCloseBtn').addEventListener('click', closeCVPrint);
+            document.getElementById('cvPrintBtn').addEventListener('click', printCV);
+            document.getElementById('cvDownloadBtn').addEventListener('click', downloadPDF);
+
+            // Close CV print with Escape
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && document.getElementById('cvPrintContainer').classList.contains('active')) {
+                    closeCVPrint();
+                }
+            });
+
+            initAvatarUpload();
+            renderFilters();
+            renderProjects();
+            renderServices();
+            renderExperience();
+            initReveal();
+            initScrollSpy();
+            initProgress();
+
+        })();
+    </script>
+</body>
+</html>
